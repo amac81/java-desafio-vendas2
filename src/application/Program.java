@@ -13,12 +13,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import entities.Sale;
 
@@ -38,20 +37,24 @@ public class Program {
 			String fileLine = br.readLine();
 			
 			List <Sale> salesList = new ArrayList<Sale>();
+						
+			Set<String> sellerNames = new HashSet <> ();
 			
 			while (fileLine != null) {
 				String [] fields = fileLine.split(",");
 				
 				salesList.add(new Sale(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), fields[2], Integer.parseInt(fields[3]), 
 						Double.parseDouble(fields[4])));
+
+				//criar colecao (Set) com nomes (nao repetidos) dos sellers
+				sellerNames.add(fields[2]);
 				
 				fileLine = br.readLine();
 			}
 			
-			
-			//mostrar lista usando consumer
-			
-			salesList.forEach(System.out::println);
+						
+			//mostrar lista usando consumer			
+			sellerNames.forEach(System.out::println);
 			
 		
 	
