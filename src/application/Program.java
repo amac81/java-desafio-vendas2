@@ -52,10 +52,18 @@ public class Program {
 				fileLine = br.readLine();
 			}
 			
-						
-			//mostrar lista usando consumer			
-			sellerNames.forEach(System.out::println);
+			System.out.println();
+			System.out.println("Total de vendas por vendedor:");
 			
+			for(String name: sellerNames) {
+				Double sales = salesList.stream()
+					.filter(s-> s.getSeller().equals(name))
+					.map(s -> s.getTotal())
+					.reduce(0.0, (s1, s2)-> s1 + s2);
+				
+				System.out.printf("%s - R$ %.2f\n", name, sales);
+			}
+		
 		
 	
 		} catch (IOException err) {
